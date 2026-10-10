@@ -45,7 +45,7 @@ export function Inquiry() {
           <Button type="submit" size="lg" className="h-12 rounded-sm">Preparar consulta <ArrowUpRight /></Button>
           {message && <div aria-live="polite" className="border-l-2 border-accent pl-5">
             <h3 className="text-2xl">Tu consulta</h3><p className="my-4 whitespace-pre-line break-words text-sm leading-relaxed text-muted-foreground">{message}</p>
-            <div className="flex flex-wrap gap-3"><Button type="button" variant="outline" onClick={async () => { try { await navigator.clipboard.writeText(message); setCopied(true); setCopyError(false); } catch { setCopyError(true); } }}>{copied ? <Check /> : <Copy />}{copied ? "Copiado" : "Copiar"}</Button><Button asChild><a href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer"><Send /> Compartir por WhatsApp</a></Button></div>
+            <div className="flex flex-wrap gap-3"><Button type="button" variant="outline" onClick={async () => { try { await navigator.clipboard.writeText(message); setCopied(true); setCopyError(false); } catch { setCopyError(true); } }}>{copied ? <Check /> : <Copy />}{copied ? "Copiado" : "Copiar"}</Button><Button asChild><a href={`https://wa.me/5493704915117?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer"><Send /> Enviar por WhatsApp</a></Button></div>
             {copyError && <p role="alert" className="mt-3 text-sm text-accent">No se pudo copiar. Seleccioná el texto de tu consulta para copiarlo.</p>}
           </div>}
         </form>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import hero from "@/assets/hero.jpg";
 import studio from "@/assets/studio.jpg";
+import artist from "@/assets/artist.jpg";
 import { Gallery } from "@/components/sections/Gallery";
 import { studioInfo } from "@/lib/content";
 import { useState } from "react";
@@ -111,12 +112,19 @@ function About() {
   return (
     <section id="sobre" className="border-t border-border px-6 py-28 md:px-12">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-12">
-        <div className="md:col-span-4">
+        <div className="md:col-span-3">
           <p className="eyebrow">01 — Sobre</p>
-          <p className="mt-8 font-display text-8xl text-primary">{studioInfo.anios}</p>
+          <figure className="mt-8 border border-border bg-card p-2">
+            <img src={artist} alt="Maxsy, tatuador con guantes negros y brazos tatuados, sosteniendo la máquina en su estudio" loading="lazy" width={832} height={1216} className="aspect-[3/4] w-full object-cover" />
+            <figcaption className="flex items-baseline justify-between p-2 pt-3">
+              <span className="font-display text-xl">Maxsy</span>
+              <span className="eyebrow">Artista</span>
+            </figcaption>
+          </figure>
+          <p className="mt-6 font-display text-6xl text-primary">{studioInfo.anios}</p>
           <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">años tatuando</p>
         </div>
-        <div className="md:col-span-8">
+        <div className="md:col-span-8 md:col-start-5">
           <blockquote className="font-display text-4xl leading-tight md:text-6xl">
             “{studioInfo.cita}”
           </blockquote>

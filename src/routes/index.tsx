@@ -4,6 +4,10 @@ import hero from "@/assets/hero.jpg";
 import studio from "@/assets/studio.jpg";
 import { Gallery } from "@/components/sections/Gallery";
 import { studioInfo } from "@/lib/content";
+import { useState } from "react";
+import { Menu, X, MapPin, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Inquiry } from "@/components/sections/Inquiry";
 
 const TITLE = "MAXSY TATTOO — Estudio de tatuajes en Formosa";
 const DESC = "Estudio de tatuajes unipersonal en Formosa, Argentina. Blackwork, realismo, tradicional y fine line. Diseños únicos dibujados a mano.";
@@ -44,21 +48,23 @@ function Index() {
       <Gallery />
       <Process />
       <Studio />
+      <Inquiry />
       <Contact />
     </main>
   );
 }
 
 function Nav() {
+  const [open, setOpen] = useState(false);
+  const links = [{ href: "#sobre", label: "Sobre" }, { href: "#trabajos", label: "Trabajos" }, { href: "#proceso", label: "Proceso" }, { href: "#preguntas", label: "Preguntas" }, { href: "#consulta", label: "Turnos" }];
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 mix-blend-difference md:px-12">
+    <header className="fixed inset-x-0 top-0 z-50 flex flex-wrap items-center justify-between border-b border-border bg-background/95 px-6 py-4 backdrop-blur-md md:px-12">
       <a href="#top" className="font-display text-xl tracking-tight">MAXSY<span className="text-accent">.</span></a>
       <nav aria-label="Principal" className="hidden gap-8 text-xs uppercase tracking-[0.25em] md:flex">
-        <a href="#sobre" className="hover:text-accent">Sobre</a>
-        <a href="#trabajos" className="hover:text-accent">Trabajos</a>
-        <a href="#proceso" className="hover:text-accent">Proceso</a>
-        <a href="#contacto" className="hover:text-accent">Turnos</a>
+        {links.map(link => <a key={link.href} href={link.href} className="hover:text-primary">{link.label}</a>)}
       </nav>
+      <Button variant="ghost" size="icon" className="md:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
+      {open && <nav id="mobile-nav" aria-label="Navegación móvil" className="flex w-full flex-col gap-4 border-t border-border py-5 md:hidden">{links.map(link => <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="text-lg hover:text-primary">{link.label}</a>)}</nav>}
     </header>
   );
 }
@@ -71,10 +77,10 @@ function Hero() {
     transition: { duration: 1.1, delay: d, ease },
   });
   return (
-    <section id="top" className="relative grid min-h-screen grid-cols-1 overflow-hidden md:grid-cols-12">
-      <div className="relative z-10 flex flex-col justify-end px-6 pb-16 pt-32 md:col-span-7 md:px-12 md:pb-24">
+    <section id="top" className="relative grid min-h-[min(760px,90svh)] grid-cols-1 overflow-hidden md:grid-cols-12">
+      <div className="relative z-10 flex flex-col justify-end px-6 pb-14 pt-32 md:col-span-8 md:px-12 md:pb-20">
         <motion.p {...a(0.1, 10)} className="eyebrow">Formosa · Argentina · Est. 2016</motion.p>
-        <h1 className="mt-6 text-[18vw] leading-[0.85] md:text-[11vw]">
+        <h1 className="mt-6 text-7xl leading-[0.9] sm:text-8xl lg:text-9xl">
           <motion.span {...a(0.25)} className="block">Maxsy</motion.span>
           <motion.span {...a(0.4)} className="block italic text-primary">Tattoo</motion.span>
         </h1>
@@ -82,21 +88,20 @@ function Hero() {
           hecho a mano
         </motion.p>
         <motion.div {...a(1.1, 10)} className="mt-10 flex flex-wrap items-center gap-6">
-          <a href="#contacto" className="bg-primary px-7 py-4 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
-            Pedir turno
-          </a>
-          <a href="#trabajos" className="text-xs uppercase tracking-[0.25em] text-muted-foreground underline-offset-8 hover:text-foreground hover:underline">
+          <Button asChild className="h-12 rounded-sm px-7 text-xs uppercase tracking-[0.2em]"><a href="#consulta">Pedir turno <ArrowUpRight /></a></Button>
+          <Button asChild variant="link" className="text-xs uppercase tracking-[0.2em] text-foreground"><a href="#trabajos">
             Ver trabajos →
-          </a>
+          </a></Button>
         </motion.div>
       </div>
       <motion.div
         initial={r ? false : { clipPath: "inset(100% 0 0 0)" }}
         animate={{ clipPath: "inset(0% 0 0 0)" }}
         transition={{ duration: 1.4, ease }}
-        className="absolute inset-0 md:relative md:col-span-5"
+        className="absolute inset-0"
       >
-        <img src={hero} alt="Manos de Maxsy con guantes negros tatuando un antebrazo bajo una lámpara cálida" width={1280} height={1600} className="h-full w-full object-cover opacity-40 md:opacity-100" />
+        <img src={hero} alt="Manos de Maxsy con guantes negros tatuando un antebrazo bajo una lámpara cálida" width={1280} height={1600} className="h-full w-full object-cover object-[center_45%] opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-background/10" />
       </motion.div>
     </section>
   );
@@ -165,12 +170,12 @@ function Contact() {
   return (
     <section id="contacto" className="border-t border-border px-6 py-28 md:px-12">
       <div className="mx-auto max-w-7xl">
-        <p className="eyebrow">05 — Turnos</p>
+        <p className="eyebrow">07 — Contacto</p>
         <h2 className="mt-4 text-6xl md:text-9xl">Escribime<span className="text-primary">.</span></h2>
         <div className="mt-16 grid gap-10 border-t border-border pt-10 text-sm md:grid-cols-3">
-          <div><p className="eyebrow">WhatsApp</p><a href="https://wa.me/5493700000000" className="mt-3 block font-display text-2xl hover:text-accent">+54 9 370 000-0000</a></div>
+          <div><p className="eyebrow">Tu idea</p><Button asChild variant="link" className="mt-3 h-auto p-0 font-display text-2xl"><a href="#consulta">Preparar consulta <ArrowUpRight /></a></Button></div>
           <div><p className="eyebrow">Instagram</p><a href="https://instagram.com/maxsytattoo" className="mt-3 block font-display text-2xl hover:text-accent">@maxsytattoo</a></div>
-          <div><p className="eyebrow">Dirección</p><p className="mt-3 font-display text-2xl">Formosa Capital, Argentina</p></div>
+          <div><p className="eyebrow">Ubicación</p><a href="https://www.google.com/maps/search/?api=1&query=Formosa+Capital+Argentina" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-display text-2xl hover:text-primary"><MapPin className="size-5 shrink-0" />Formosa Capital, Argentina</a></div>
         </div>
         <p className="mt-24 text-xs text-muted-foreground">© {new Date().getFullYear()} MAXSY TATTOO</p>
       </div>

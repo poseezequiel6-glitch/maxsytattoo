@@ -35,38 +35,39 @@
 
 :root {
   --radius: 2px;
-  --background: oklch(0.14 0.008 40);
-  --foreground: oklch(0.92 0.015 75);
-  --bone: oklch(0.86 0.025 75);
-  --card: oklch(0.18 0.01 40);
-  --card-foreground: oklch(0.92 0.015 75);
-  --popover: oklch(0.18 0.01 40);
-  --popover-foreground: oklch(0.92 0.015 75);
-  --primary: oklch(0.56 0.15 32);
-  --primary-foreground: oklch(0.96 0.01 75);
-  --secondary: oklch(0.22 0.012 40);
-  --secondary-foreground: oklch(0.92 0.015 75);
-  --muted: oklch(0.22 0.012 40);
-  --muted-foreground: oklch(0.7 0.02 70);
-  --accent: oklch(0.66 0.14 35);
-  --accent-foreground: oklch(0.14 0.008 40);
+  --background: oklch(0.105 0.006 285);
+  --foreground: oklch(0.96 0.006 250);
+  --bone: oklch(0.88 0.05 245);
+  --card: oklch(0.16 0.012 280);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.77 0.13 235);
+  --primary-foreground: oklch(0.14 0.025 260);
+  --secondary: oklch(0.23 0.045 285);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.21 0.015 280);
+  --muted-foreground: oklch(0.72 0.025 260);
+  --accent: oklch(0.73 0.16 300);
+  --accent-foreground: var(--background);
   --destructive: oklch(0.6 0.2 27);
-  --destructive-foreground: oklch(0.96 0.01 75);
-  --border: oklch(0.92 0.015 75 / 14%);
-  --input: oklch(0.92 0.015 75 / 20%);
-  --ring: oklch(0.66 0.14 35);
+  --destructive-foreground: var(--foreground);
+  --border: oklch(0.8 0.04 280 / 18%);
+  --input: oklch(0.8 0.04 280 / 30%);
+  --ring: var(--primary);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 90px; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0; }
   :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
   ::selection { background: var(--color-primary); color: var(--color-primary-foreground); }
   @media (prefers-reduced-motion: reduce) {
